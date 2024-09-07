@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:3333
+
+### Register a new user
+# @name registerUser
+
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "John Ross", 
+  "email": "john.ross@vallete.com", 
+  "password": "123456"
+}

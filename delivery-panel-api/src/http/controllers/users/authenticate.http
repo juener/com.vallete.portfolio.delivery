@@ -1,0 +1,10 @@
+@baseUrl = http://localhost:3333
+
+### Authenticate user
+POST {{baseUrl}}/authenticate
+Content-Type: application/json
+
+{
+  "email": "john.ross@vallete.com", 
+  "password": "123456"
+}
