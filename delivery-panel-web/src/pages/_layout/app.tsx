@@ -3,11 +3,9 @@ import { Outlet } from 'react-router-dom'
 
 export function AppLayout() {
   return (
-    <div className="h-screen flex flex-col">
+    <div className="min-h-screen">
       <Header />
-      <div className="flex-grow">
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   )
 }

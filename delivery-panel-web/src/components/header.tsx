@@ -1,3 +1,4 @@
+import { NavLink } from './common/nav-link'
 import { ThemeToggle } from './theme/theme-toggle'
 
 import {
@@ -34,7 +35,7 @@ const userItems = [
 ]
 
 function navigationMenuLinkHomeStyle() {
-  return 'px-8 text-secondary hover:text-foreground hover:cursor-pointer'
+  return 'px-8 text-secondary hover:text-foreground hover:cursor-pointers'
 }
 
 function navigationMenuLinkStyle() {
@@ -43,66 +44,70 @@ function navigationMenuLinkStyle() {
 
 export function Header() {
   return (
-    <div className="h-14">
-      <NavigationMenu>
-        <NavigationMenuList className="w-screen p-2 bg-primary rounded-lg">
-          <NavigationMenuItem>
-            <NavigationMenuLink className={navigationMenuLinkHomeStyle()}>
-              Dashboard
-            </NavigationMenuLink>
-          </NavigationMenuItem>
+    <NavigationMenu>
+      <NavigationMenuList className="w-screen p-2 bg-primary rounded-lg">
+        <NavigationMenuItem>
+          <NavigationMenuLink className={navigationMenuLinkHomeStyle()}>
+            <NavLink to="/dashboard">Dashboard</NavLink>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
 
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Administration</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              {administrativeItems.map((item) => (
-                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                  {item.label}
-                </NavigationMenuLink>
-              ))}
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink className={navigationMenuLinkHomeStyle()}>
+            <NavLink to="/orders">Orders</NavLink>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
 
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Finance</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              {financeItems.map((item) => (
-                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                  {item.label}
-                </NavigationMenuLink>
-              ))}
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Administration</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            {administrativeItems.map((item) => (
+              <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                {item.label}
+              </NavigationMenuLink>
+            ))}
+          </NavigationMenuContent>
+        </NavigationMenuItem>
 
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Register</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              {registerItems.map((item) => (
-                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                  {item.label}
-                </NavigationMenuLink>
-              ))}
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Finance</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            {financeItems.map((item) => (
+              <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                {item.label}
+              </NavigationMenuLink>
+            ))}
+          </NavigationMenuContent>
+        </NavigationMenuItem>
 
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>User</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              {userItems.map((item) => (
-                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                  {item.label}
-                </NavigationMenuLink>
-              ))}
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Register</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            {registerItems.map((item) => (
+              <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                {item.label}
+              </NavigationMenuLink>
+            ))}
+          </NavigationMenuContent>
+        </NavigationMenuItem>
 
-          <NavigationMenuItem>
-            <NavigationMenuLink className={navigationMenuLinkHomeStyle()}>
-              <ThemeToggle />
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-    </div>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>User</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            {userItems.map((item) => (
+              <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                {item.label}
+              </NavigationMenuLink>
+            ))}
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuLink className={navigationMenuLinkHomeStyle()}>
+            <ThemeToggle />
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
   )
 }
