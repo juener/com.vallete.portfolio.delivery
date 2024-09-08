@@ -11,6 +11,7 @@ import {
   NavigationMenuTrigger,
 } from './ui/navigation-menu'
 import { getUserProfileApi } from '@/api/get-user-profile'
+import { Skeleton } from './ui/skeleton'
 
 const administrativeItems = [
   { label: 'One More', path: '/one-more' },
@@ -45,10 +46,12 @@ function navigationMenuLinkStyle() {
 }
 
 export function Header() {
-  const { data: profileDetails } = useQuery({
-    queryKey: ['profile-details'],
-    queryFn: getUserProfileApi,
-  })
+  const { data: profileDetails, isLoading: isLoadingProfileDetails } = useQuery(
+    {
+      queryKey: ['profile-details'],
+      queryFn: getUserProfileApi,
+    },
+  )
 
   return (
     <NavigationMenu>
@@ -100,7 +103,11 @@ export function Header() {
 
         <NavigationMenuItem>
           <NavigationMenuTrigger>
-            {profileDetails?.user?.name}
+            {isLoadingProfileDetails ? (
+              <Skeleton className="w-24 h-4" />
+            ) : (
+              profileDetails?.user?.name
+            )}
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             {userItems.map((item, i) => (
