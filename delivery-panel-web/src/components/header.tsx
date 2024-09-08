@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query'
 import { NavLink } from './common/nav-link'
 import { ThemeToggle } from './theme/theme-toggle'
 
@@ -9,6 +10,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from './ui/navigation-menu'
+import { getUserProfileApi } from '@/api/get-user-profile'
 
 const administrativeItems = [
   { label: 'One More', path: '/one-more' },
@@ -35,7 +37,7 @@ const userItems = [
 ]
 
 function navigationMenuLinkHomeStyle() {
-  return 'px-8 text-secondary hover:text-foreground hover:cursor-pointers'
+  return 'px-8 text-white hover:text-foreground hover:cursor-pointers'
 }
 
 function navigationMenuLinkStyle() {
@@ -43,6 +45,11 @@ function navigationMenuLinkStyle() {
 }
 
 export function Header() {
+  const { data: profileDetails } = useQuery({
+    queryKey: ['profile-details'],
+    queryFn: getUserProfileApi,
+  })
+
   return (
     <NavigationMenu>
       <NavigationMenuList className="w-screen p-2 bg-primary rounded-lg">
@@ -61,8 +68,8 @@ export function Header() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Administration</NavigationMenuTrigger>
           <NavigationMenuContent>
-            {administrativeItems.map((item) => (
-              <NavigationMenuLink className={navigationMenuLinkStyle()}>
+            {administrativeItems.map((item, i) => (
+              <NavigationMenuLink className={navigationMenuLinkStyle()} key={i}>
                 {item.label}
               </NavigationMenuLink>
             ))}
@@ -72,8 +79,8 @@ export function Header() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Finance</NavigationMenuTrigger>
           <NavigationMenuContent>
-            {financeItems.map((item) => (
-              <NavigationMenuLink className={navigationMenuLinkStyle()}>
+            {financeItems.map((item, i) => (
+              <NavigationMenuLink className={navigationMenuLinkStyle()} key={i}>
                 {item.label}
               </NavigationMenuLink>
             ))}
@@ -83,8 +90,8 @@ export function Header() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Register</NavigationMenuTrigger>
           <NavigationMenuContent>
-            {registerItems.map((item) => (
-              <NavigationMenuLink className={navigationMenuLinkStyle()}>
+            {registerItems.map((item, i) => (
+              <NavigationMenuLink className={navigationMenuLinkStyle()} key={i}>
                 {item.label}
               </NavigationMenuLink>
             ))}
@@ -92,10 +99,12 @@ export function Header() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger>User</NavigationMenuTrigger>
+          <NavigationMenuTrigger>
+            {profileDetails?.user?.name}
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
-            {userItems.map((item) => (
-              <NavigationMenuLink className={navigationMenuLinkStyle()}>
+            {userItems.map((item, i) => (
+              <NavigationMenuLink className={navigationMenuLinkStyle()} key={i}>
                 {item.label}
               </NavigationMenuLink>
             ))}

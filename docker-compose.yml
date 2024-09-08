@@ -1,6 +1,6 @@
 version: '3'
 
-name: portfolio-gym
+name: delivery-panel
 
 services:
   postgresql:
@@ -10,4 +10,4 @@ services:
     environment:
       - POSTGRESQL_USERNAME=docker
       - POSTGRESQL_PASSWORD=dockerPass
-      - POSTGRESQL_DATABASE=portfolio-gym
+      - POSTGRESQL_DATABASE=delivery-panel

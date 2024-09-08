@@ -25,3 +25,9 @@ https://eslint.org/docs/latest/rules
 
 https://react-hook-form.com/get-started#IntegratingControlledInputs
 npm i react-hook-form zod @hookform/resolvers
+
+https://axios-http.com/docs/intro
+npm i axios
+
+https://tanstack.com/query/latest/docs/framework/react/installation
+npm i @tanstack/react-query
