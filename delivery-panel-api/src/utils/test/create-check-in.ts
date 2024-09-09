@@ -1,8 +1,8 @@
-import { prisma } from '@/lib/prisma';
+import { prisma } from '@/lib/prisma'
 
 interface CreateCheckInInterface {
-  userId: string;
-  gymId: string;
+  userId: string
+  gymId: string
 }
 
 export async function createCheckInTest({
@@ -11,12 +11,12 @@ export async function createCheckInTest({
 }: CreateCheckInInterface) {
   const checkIn = await prisma.checkIn.create({
     data: {
-      user_id: userId,
-      gym_id: gymId,
+      userId,
+      gymId,
     },
-  });
+  })
 
-    return {
+  return {
     checkIn,
-  };
+  }
 }

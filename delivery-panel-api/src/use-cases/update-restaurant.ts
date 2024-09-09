@@ -1,28 +1,31 @@
+import { RestaurantsRepository } from '@/repositories/restaurants-repository'
 import { Restaurant } from '@prisma/client'
 import { ResourceNotFoundError } from './errors/resource-not-found'
-import { RestaurantsRepository } from '@/repositories/restaurants-repository'
 
-interface CreateRestaurantUseCaseRequest {
+interface UpdateRestaurantUseCaseRequest {
+  id: string
   cnpj: string
   title: string
   managerId: string
   email: string
 }
 
-interface CreateRestaurantUseCaseResponse {
+interface UpdateRestaurantUseCaseResponse {
   restaurant: Restaurant
 }
 
-export class CreateRestaurantUseCase {
+export class UpdateRestaurantUseCase {
   constructor(private restaurantsRepository: RestaurantsRepository) {}
 
   async execute({
+    id,
     cnpj,
     title,
     managerId,
     email,
-  }: CreateRestaurantUseCaseRequest): Promise<CreateRestaurantUseCaseResponse> {
-    const restaurant = await this.restaurantsRepository.create({
+  }: UpdateRestaurantUseCaseRequest): Promise<UpdateRestaurantUseCaseResponse> {
+    const restaurant = await this.restaurantsRepository.update({
+      id,
       cnpj,
       title,
       manager: {
