@@ -26,6 +26,7 @@ export default tseslint.config(
       "no-unused-vars": "warn",
       "no-undef": "error", 
       "quotes": ["error", "single"], 
+      "no-unused-vars": "warn",
       "@typescript-eslint/no-unused-vars": ["off", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_", "ignoreRestSiblings": true }],
       'react-refresh/only-export-components': 'off',
       'react/react-in-jsx-scope': 'off',

@@ -18,7 +18,7 @@ import { OrderDetails } from '@/components/orders/order-details'
 
 export function Orders() {
   return (
-    <div className="flex flex-col m-2">
+    <div className="w-full">
       <Helmet title="Orders" />
       <form className="flex flex-row gap-2 p-4 items-center bg-secondary rounded-lg">
         <Input placeholder="Order ID" className="h-8 w-auto" />
@@ -47,14 +47,14 @@ export function Orders() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[80px]"></TableHead>
-            <TableHead className="w-[140px]">ID</TableHead>
-            <TableHead className="w-[180px]">Ordered</TableHead>
-            <TableHead className="w-[140px]">Status</TableHead>
+            <TableHead className="w-[7%]"></TableHead>
+            <TableHead className="w-[12%]">ID</TableHead>
+            <TableHead className="w-[12%]">Ordered</TableHead>
+            <TableHead className="w-[12%]">Status</TableHead>
             <TableHead>Customer</TableHead>
-            <TableHead className="w-[100px]">Total</TableHead>
-            <TableHead className="w-[40px]" />
-            <TableHead className="w-[40px]" />
+            <TableHead className="w-[12%]">Total</TableHead>
+            <TableHead className="w-[12%]" />
+            <TableHead className="w-[12%]" />
           </TableRow>
         </TableHeader>
         <TableBody>

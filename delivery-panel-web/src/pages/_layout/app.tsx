@@ -3,9 +3,12 @@ import { Outlet } from 'react-router-dom'
 
 export function AppLayout() {
   return (
-    <div className="min-h-screen">
+    <div className="flex min-h-screen flex-col w-screen">
       <Header />
-      <Outlet />
+      <div className="flex flex-1">
+        <Outlet />
+      </div>
+      <div className="bg-yellow-700">aoisd jfo</div>
     </div>
   )
 }
