@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  delivery-postgresql:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=dockerPass
+      - POSTGRESQL_DATABASE=delivery-panel
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  delivery-api:
+    build:
+      context: ./delivery-api
+    ports:
+      - 3333:3333
+    environment:
+      - DATABASE_URL=postgresql://docker:dockerPass@delivery-postgresql:5432/delivery-panel?schema=public
+    depends_on:
+      - delivery-postgresql
+    working_dir: /delivery-api
+    entrypoint: [ "sh", "-c", "npx prisma generate && npx prisma migrate deploy && npm start" ]
+
+  delivery-web:
+    build:
+      context: ./delivery-web
+    ports:
+      - 4173:4173
+    depends_on:
+      - delivery-postgresql
+    working_dir: /delivery-web
+
+volumes:
+  postgres_data:
