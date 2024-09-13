@@ -1,0 +1,98 @@
+@baseUrl = http://localhost:3333
+@email = "johndoe@vallete.com"
+@password = "123456"
+
+
+##### USERS #####
+### Register a new user ###
+# @name register
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "John Doe", 
+  "email": {{email}}, 
+  "password": {{password}}
+}
+
+### Authenticate an existent user ###
+# @name authenticate
+POST {{baseUrl}}/authenticate
+Content-Type: application/json
+
+{
+  "email": {{email}}, 
+  "password": {{password}}
+}
+###
+@token = {{authenticate.response.body.token}} 
+
+
+### Get the profile details ### 
+# @name profile
+GET {{baseUrl}}/me
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{}
+
+### Get the metrics details ###
+# @name metrics
+GET {{baseUrl}}/users/metrics
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+
+##### GYMS #####
+
+### Create a new gym ### 
+# @name createGym
+POST {{baseUrl}}/gyms
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{}
+### 
+@gym-id = {{createGym.request.body.id}}
+
+### Search for gyms ### 
+GET {{baseUrl}}/gyms/search
+  ?query=test
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{}
+
+### Fetch gyms nearby ### 
+GET {{baseUrl}}/gyms/nearby
+
+
+##### CHECK-INS #####
+
+### Create a new check-in ###
+# @name createCheckIn
+POST {{baseUrl}}/check-ins
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{}
+
+###
+@check-in-id = {{createGym.request.body.id}}
+
+
+### Validate an existent check-in ### 
+# @name validateCheckIn
+GET {{baseUrl}}/check-ins/{{check-in-id}}/validate
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{}
+
+### Fetch the check-in history ### 
+GET {{baseUrl}}/history
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{}
