@@ -12,7 +12,10 @@ import fastifyCors from '@fastify/cors'
 export const app = fastify()
 
 app.register(fastifyCors, {
-  origin: [`http://localhost:${env.PORT_FRONTEND}`, `http://vallete.com.br`],
+  origin: [
+    `http://localhost:${env.PORT_FRONTEND}`,
+    `http://vallete.com.br:4173`,
+  ],
   credentials: true,
 })
 
