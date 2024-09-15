@@ -1,14 +1,14 @@
-import { FastifyRequest, FastifyReply } from 'fastify';
+import { FastifyRequest, FastifyReply } from 'fastify'
 
 export async function refreshTokenController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  await request.jwtVerify({ onlyCookie: true });
+  await request.jwtVerify({ onlyCookie: true })
 
-    const { role } = request.user;
+  const { role } = request.user
 
-    const token = await reply.jwtSign(
+  const token = await reply.jwtSign(
     {
       role,
     },
@@ -17,7 +17,7 @@ export async function refreshTokenController(
         sub: request.user.sub,
       },
     },
-  );
+  )
 
   const refreshToken = await reply.jwtSign(
     {
@@ -29,17 +29,17 @@ export async function refreshTokenController(
         expiresIn: '7d',
       },
     },
-  );
+  )
 
-    return reply
+  return reply
     .setCookie('refreshToken', refreshToken, {
       path: '/',
-      secure: true,
+      secure: false, // TODO: HTTPS
       sameSite: true,
       httpOnly: true,
     })
     .status(200)
     .send({
       token,
-    });
+    })
 }
