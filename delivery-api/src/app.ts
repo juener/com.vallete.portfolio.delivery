@@ -27,6 +27,7 @@ app.register(fastifyCookie, {
     httpOnly: true,
     secure: false, //process.env.NODE_ENV === 'production'
     sameSite: 'lax',
+    domain: env.NODE_ENV === 'production' ? 'vallete.com.br' : 'vallete.com.br',
   },
 })
 
