@@ -19,7 +19,16 @@ app.register(fastifyCors, {
   credentials: true,
 })
 
-app.register(fastifyCookie)
+// app.register(fastifyCookie)
+app.register(fastifyCookie, {
+  secret: env.JWT_SECRET,
+  hook: 'onRequest',
+  parseOptions: {
+    httpOnly: true,
+    secure: false, //process.env.NODE_ENV === 'production'
+    sameSite: 'lax',
+  },
+})
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
