@@ -18,7 +18,7 @@ const userForm = z.object({
 
 type UserForm = z.infer<typeof userForm>
 
-export function PatchUserFormComponent() {
+export function PatchUserComponent() {
   const { data: profileDetails } = useQuery({
     queryKey: ['profile-details'],
     queryFn: getUserProfileApi,
@@ -81,12 +81,14 @@ export function PatchUserFormComponent() {
       className="flex flex-col gap-3 py-4"
     >
       <input hidden {...register('id')} />
+
       <Label htmlFor="name">Name</Label>
       <Input
         id="name"
         {...register('name')}
         disabled={isSubmitting || isSubmitted}
       />
+
       <Label htmlFor="email">Email</Label>
       <Input
         // value={profileDetails?.user.email}
@@ -94,14 +96,16 @@ export function PatchUserFormComponent() {
         disabled={isSubmitting || isSubmitted}
         {...register('email')}
       />
+
       <Label htmlFor="password">Password</Label>
       <Input
         id="password"
         disabled={isSubmitting || isSubmitted}
         {...register('password')}
       />
+
       <Button type="submit" disabled={isSubmitting || isSubmitted}>
-        {isSubmitted ? 'Changes saved successfully' : 'Save changes'}
+        {isSubmitted ? 'Changes saved successfully' : 'Save'}
       </Button>
     </form>
   )

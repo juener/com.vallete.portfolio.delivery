@@ -57,8 +57,8 @@ model Restaurant {
   cnpj  String
   title String
 
-  manager User   @relation(fields: [userId], references: [id])
-  userId  String
+  manager   User   @relation(fields: [managerId], references: [id])
+  managerId String
 
   email  String
   orders Order[] //changed from Order to orders
@@ -69,6 +69,8 @@ model Restaurant {
 model Order {
   id     String      @id @default(uuid())
   status OrderStatus
+
+  items OrderItems[]
 
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId String
@@ -81,4 +83,14 @@ enum OrderStatus {
   ON_THE_WAY
   DELIVERED
   CANCELED
+}
+
+model OrderItems {
+  id       Int     @id @default(autoincrement())
+  name     String
+  price    Float
+  quantity Float
+  obs      String
+  Order    Order?  @relation(fields: [orderId], references: [id])
+  orderId  String?
 }

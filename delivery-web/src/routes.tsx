@@ -6,6 +6,7 @@ import { Dashboard } from './pages/app/dashboard'
 import { Login } from './pages/auth/login'
 import { Orders } from './pages/app/orders'
 import { NotFound } from './pages/default/not-found'
+import { Forms } from './pages/app/forms'
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
     children: [
       { path: '/dashboard', element: <Dashboard /> },
       { path: '/orders', element: <Orders /> },
+      { path: '/forms', element: <Forms /> },
     ],
   },
   {

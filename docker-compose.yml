@@ -10,7 +10,7 @@ services:
       - POSTGRESQL_PASSWORD=dockerPass
       - POSTGRESQL_DATABASE=delivery-panel
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/bitnami/postgresql
 
   delivery-api:
     build:
@@ -35,3 +35,4 @@ services:
 
 volumes:
   postgres_data:
+    external: false

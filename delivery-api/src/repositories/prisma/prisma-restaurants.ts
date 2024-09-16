@@ -3,6 +3,15 @@ import { Prisma, Restaurant } from '@prisma/client'
 import { RestaurantsRepository } from '../restaurants-repository'
 
 export class PrismaRestaurantsRepository implements RestaurantsRepository {
+  async getRestaurantById(id: string): Promise<Restaurant | null> {
+    const restaurant = await prisma.restaurant.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    return restaurant
+  }
   async delete(id: string): Promise<void> {
     await prisma.restaurant.delete({
       where: {
