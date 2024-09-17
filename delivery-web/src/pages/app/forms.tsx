@@ -1,4 +1,5 @@
 import { getRestaurantsApi } from '@/api/get-restaurants'
+import { SharedScreenComponent } from '@/components/common/shared-screen'
 import { SheetComponent } from '@/components/common/sheet-component'
 import { PostRestaurantComponent } from '@/components/form/post-restaurant'
 import { Button } from '@/components/ui/button'
@@ -28,6 +29,7 @@ export function Forms() {
             title={`Restaurant ${restaurant.title}`}
             description="Edit the restaurant and save the changes."
             body={<PostRestaurantComponent restaurantId={restaurant.id} />}
+            sharedScreen={<SharedScreenComponent />}
             footer={<>{`You are editing the ${restaurant.title}.`}</>}
           />
         )
