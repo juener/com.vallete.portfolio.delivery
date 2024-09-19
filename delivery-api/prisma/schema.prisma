@@ -67,8 +67,8 @@ model Restaurant {
 }
 
 model Order {
-  id     String      @id @default(uuid())
-  status OrderStatus
+  id     String       @id @default(uuid())
+  status OrderStatus?
 
   items OrderItems[]
 
@@ -90,7 +90,7 @@ model OrderItems {
   name     String
   price    Float
   quantity Float
-  obs      String
+  obs      String?
   Order    Order?  @relation(fields: [orderId], references: [id])
   orderId  String?
 }
