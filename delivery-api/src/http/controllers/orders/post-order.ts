@@ -3,17 +3,33 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export async function postOrder(request: FastifyRequest, reply: FastifyReply) {
-  const postOrdersItemsBodySchema = z.object({
+  const postOrderCustomerAddressBodySchema = z.object({
+    street: z.string(),
+    number: z.string(),
+    complement: z.string().optional(),
+    reference: z.string().optional(),
+    neighborhood: z.string(),
+    city: z.string().optional(),
+  })
+
+  const postOrderCustomerBodySchema = z.object({
+    name: z.string(),
+    phoneNumber: z.string(),
+    address: postOrderCustomerAddressBodySchema,
+  })
+
+  const postOrderItemsBodySchema = z.object({
     name: z.string(),
     price: z.number(),
     quantity: z.number(),
     obs: z.string().optional(),
   })
 
-  const postOrdersBodySchema = z.object({
+  const postOrderBodySchema = z.object({
     id: z.string().optional(),
     restaurantId: z.string().length(36),
-    items: z.array(postOrdersItemsBodySchema),
+    customer: postOrderCustomerBodySchema,
+    items: z.array(postOrderItemsBodySchema),
     status: z.enum([
       'PENDING',
       'WORKING',
@@ -24,9 +40,8 @@ export async function postOrder(request: FastifyRequest, reply: FastifyReply) {
     ]),
   })
 
-  const { id, restaurantId, items, status } = postOrdersBodySchema.parse(
-    request.body,
-  )
+  const { id, restaurantId, customer, items, status } =
+    postOrderBodySchema.parse(request.body)
 
   try {
     const postOrderUseCase = makePostOrderUseCase()
@@ -34,6 +49,7 @@ export async function postOrder(request: FastifyRequest, reply: FastifyReply) {
     await postOrderUseCase.execute({
       id,
       restaurantId,
+      customer,
       items,
       status,
     })

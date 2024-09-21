@@ -72,8 +72,13 @@ model Order {
 
   items OrderItems[]
 
+  customer   Customer @relation(fields: [customerId], references: [phoneNumber])
+  customerId String
+
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId String
+
+  createdAt DateTime @default(now())
 }
 
 enum OrderStatus {
@@ -93,4 +98,23 @@ model OrderItems {
   obs      String?
   Order    Order?  @relation(fields: [orderId], references: [id])
   orderId  String?
+}
+
+model Customer {
+  phoneNumber String   @id @unique
+  name        String
+  address     Address? @relation(fields: [addressId], references: [id])
+  addressId   Int?
+  Order       Order[]
+}
+
+model Address {
+  id           Int        @id @default(autoincrement())
+  street       String
+  number       String
+  complement   String?
+  reference    String?
+  neighborhood String
+  city         String?
+  Customer     Customer[]
 }
