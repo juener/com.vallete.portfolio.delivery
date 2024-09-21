@@ -40,6 +40,7 @@ interface GetOrdersResponse {
     }[]
     totalItems: number
     total: number
+    createdAt: Date
   }[]
 }
 
